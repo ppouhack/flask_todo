@@ -6,14 +6,14 @@ from models import Todo, db, Fcuser
 import requests
 from . import api
 
-@api.route('/todos', methods=['GET', 'POST'])
+@api.route('/todos', methods=['GET', 'POST', 'DELETE'])
 def todos():
-    if request.method == 'POST':
-        # 로그인 필요
-        userid = session.get('userid', None)
-        if not userid:
-            return jsonify(), 401
+    # 로그인 필요
+    userid = session.get('userid', 1)
+    if not userid:
+        return jsonify(), 401
 
+    if request.method == 'POST':
         data = request.get_json()
         todo = Todo()
         todo.title = data.get('title')
@@ -25,10 +25,20 @@ def todos():
         return jsonify(), 201
 
     elif request.method == 'GET':
-        pass
+        todos = Todo.query.filter_by(fcuser_id=userid)
+        return jsonify([t.serialize for t in todos]), 201
 
-    data = request.get_json()
-    return jsonify(data)
+    elif request.method == 'DELETE':
+        data = request.get_json()
+        todo_id = data.get('todo_id')
+        todo = Todo.query.filter_by(id=todo_id).first()
+
+        db.session.delete(todo)
+        db.session.commit()
+
+        return jsonify(), 203
+
+    return jsonify()
 
 @api.route('/test', methods=['POST'])
 def test():
