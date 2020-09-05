@@ -7,7 +7,7 @@ class Todo(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     # fcuser와 연결
-    fcuser_id = db.Column(db.Integer, db.ForeignKey('fcuser.id'), ullable=False)
+    fcuser_id = db.Column(db.Integer, db.ForeignKey('fcuser.id'), nullable=False)
     title = db .Column(db.String(256))
     tstamp = db.Column(db.DateTime, server_default=db.func.now())
 
