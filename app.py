@@ -2,14 +2,23 @@ import os
 from flask import Flask
 from flask import request
 from models import db, Fcuser
-from forms import RegisterForm
-from flask import render_template,redirect
+from forms import RegisterForm, LoginForm
+from flask import render_template,redirect, session
 
 app = Flask(__name__)
 
+
+@app.route('/',methods=['GET'])
+def home():
+    return render_template('home.html')
+
 @app.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        session['userid'] = form.data.get('userid')
+        return redirect('/')
+    return render_template('login.html', form=form)
 
 @app.route('/register',methods=['GET','POST'])
 def register():
