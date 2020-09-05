@@ -7,10 +7,15 @@ from flask import render_template,redirect, session
 
 app = Flask(__name__)
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('userid', None)
+    return redirect('/')
 
 @app.route('/',methods=['GET'])
 def home():
-    return render_template('home.html')
+    userid = session.get('userid',None)
+    return render_template('home.html', userid=userid)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
