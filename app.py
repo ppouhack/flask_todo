@@ -4,8 +4,10 @@ from flask import request
 from models import db, Fcuser
 from forms import RegisterForm, LoginForm
 from flask import render_template,redirect, session
+from api_v1 import api as api_v1
 
 app = Flask(__name__)
+app.register_blueprint(api_v1, url_prefix='/api/v1')
 
 @app.route('/logout', methods=['GET'])
 def logout():

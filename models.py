@@ -16,6 +16,7 @@ class Todo(db.Model):
         return {
             'id':self.id,
             'title': self.title,
+            'fcuser':self.fcuser.userid,
             'tstamp': self.tstamp
         }
 
