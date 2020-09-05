@@ -11,16 +11,15 @@
         <div class="row mt-5">
             <h1>HOME</h1>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            {% if userid %}
-            <a href="logout"/>로그아웃</a>
-            {% else %}
-            <a href="login">로그인</a>|<a href="/register">회원가입</a>
-            {% endif %}
+        <div class="row mt-5">
+            <div class="col-12">
+                {% if userid %}
+                <a href="logout"/>로그아웃</a>
+                {% else %}
+                <a href="login">로그인</a>|<a href="/register">회원가입</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 </body>
 </html>
