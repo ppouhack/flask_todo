@@ -17,9 +17,12 @@ def logout():
 @app.route('/',methods=['GET'])
 def home():
     userid = session.get('userid',None)
-    fcuser = Fcuser.query.filter_by(userid=userid).first()
-    todos = Todo.query.filter_by(fcuser_id=fcuser.id)
-
+    try:
+        fcuser = Fcuser.query.filter_by(userid=userid).first()
+        todos = Todo.query.filter_by(fcuser_id=fcuser.id)
+    except Exception as e:
+        print(e)
+        return redirect('/login')
     return render_template('home.html', userid=userid, todos=todos)
 
 @app.route('/login',methods=['GET','POST'])
