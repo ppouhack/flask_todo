@@ -17,7 +17,12 @@ def todos():
         data = request.get_json()
         todo = Todo()
         todo.title = data.get('title')
-        todo.fcuser_id = userid
+
+        fcuser = Fcuser.query.filter_by(userid=userid).first()
+        todo.fcuser_id = fcuser.id
+
+        todo.due = data.get('due')
+        todo.status = 0
 
         db.session.add(todo)
         db.session.commit()

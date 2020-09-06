@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask import request
-from models import db, Fcuser
+from models import db, Fcuser, Todo
 from forms import RegisterForm, LoginForm
 from flask import render_template,redirect, session
 from api_v1 import api as api_v1
@@ -17,7 +17,10 @@ def logout():
 @app.route('/',methods=['GET'])
 def home():
     userid = session.get('userid',None)
-    return render_template('home.html', userid=userid)
+    fcuser = Fcuser.query.filter_by(userid=userid).first()
+    todos = Todo.query.filter_by(fcuser_id=fcuser.id)
+
+    return render_template('home.html', userid=userid, todos=todos)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
