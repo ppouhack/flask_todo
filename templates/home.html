@@ -13,13 +13,61 @@
         </div>
         <div class="row mt-5">
             <div class="col-12">
+                <ul class="nav">
                 {% if userid %}
-                <a href="logout"/>로그아웃</a>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/logout">로그아웃</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ userid }}</a>
+                  </li>
                 {% else %}
-                <a href="login">로그인</a>|<a href="/register">회원가입</a>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/login">로그인</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/register">회원가입</a>
+                  </li>
                 {% endif %}
+                </ul>
             </div>
         </div>
+        <div class="row mt-5">
+            <h3> 할일 생성</h3>
+            <div class="col-12"><!-- 할일 제목 -->
+                <input type="text" class="form-control" id="title" placeholder="할일 제목"/>
+            </div>
+            <div class="col-12 col-sm-7 mt-2"><!-- 날짜 -->
+                <input type="text" class="form-control" id="data" placeholder="기한"/>
+            </div>
+            <div class="col-12 col-sm-5 mt-2"><!-- 확인 -->
+                <button type="button" class="btn btn-primary">생성</button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <h3> 할일 목록</h3>
+            <div class="col-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">할일제목</th>
+                      <th scope="col">기한</th>
+                      <th scope="col">완료처리</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
