@@ -100,7 +100,9 @@
                           <td><del>{{ todo.title }}</del></td>
                           <td><del>{{ todo.due }}</del></td>
                           <td>완료</td>
+                        </tr>
                         {% else %}
+                        <tr>
                           <th scope="row">{{ todo.id }}</th>
                           <td>{{ todo.title }}</td>
                           <td>{{ todo.due }}</td>

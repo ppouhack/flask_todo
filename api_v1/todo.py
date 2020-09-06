@@ -8,7 +8,7 @@ from . import api
 
 @api.route('/todos/done', methods=['PUT'])
 def todos_done():
-    userid = session.get('userid', 1)
+    userid = session.get('userid', None)
     if not userid:
         return jsonify(), 401
 
@@ -30,7 +30,7 @@ def todos_done():
 @api.route('/todos', methods=['GET', 'POST', 'DELETE'])
 def todos():
     # 로그인 필요
-    userid = session.get('userid', 1)
+    userid = session.get('userid', None)
     if not userid:
         return jsonify(), 401
 
