@@ -28,6 +28,18 @@
            window.location = '/';
         });
     }
+    function doneTodo(todo_id){
+        $.ajax({
+            url: '/api/v1/todos/done',
+            contentType: 'application/json',
+            method: 'PUT',
+            data: JSON.stringify({
+                todo_id: todo_id
+            })
+        }).done(function (res){
+           window.location = '/';
+        });
+    }
 </script>
 </head>
 <body>
@@ -82,12 +94,19 @@
                   </thead>
                   <tbody>
                     {% for todo in todos %}
-                    <tr>
-                      <th scope="row">{{ todo.id }}</th>
-                      <td>{{ todo.title }}</td>
-                      <td>{{ todo.due }}</td>
-                      <td>{{ todo.status }}</td>
-                    </tr>
+                        {%  if todo.status %}
+                        <tr>
+                          <th scope="row"><del>{{ todo.id }}</del></th>
+                          <td><del>{{ todo.title }}</del></td>
+                          <td><del>{{ todo.due }}</del></td>
+                          <td>완료</td>
+                        {% else %}
+                          <th scope="row">{{ todo.id }}</th>
+                          <td>{{ todo.title }}</td>
+                          <td>{{ todo.due }}</td>
+                          <td><button type="button" class="btn btn-secondary" onclick="doneTodo({{ todo.id }});">완료</button></td>
+                        </tr>
+                        {% endif %}
                     {% endfor %}
                   </tbody>
                 </table>
